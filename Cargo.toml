@@ -1,5 +1,5 @@
 [package]
-name = "Screento_maker_rs"
+name = "screento_maker_cli_rs"
 version = "0.1.0"
 edition = "2021"
 

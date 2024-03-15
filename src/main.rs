@@ -1,4 +1,5 @@
 mod utils;
+
 use std::path::{Path, PathBuf};
 use indicatif::{ProgressBar, ProgressStyle};
 use rayon::prelude::*;
@@ -12,7 +13,7 @@ fn process(inp: &PathBuf, out:&PathBuf, mut scr:Screenton){
 }
 
 fn main() {
-    let (inp,out,dot)=("in","out",7); //utils::parse::parse_args();
+    let (inp,out,dot)=utils::parse::parse_args();
     let inp = Path::new(&inp);
     let out = Path::new(&out);
     let dot_center = dot/2;

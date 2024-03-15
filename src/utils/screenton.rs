@@ -1,7 +1,7 @@
 use ndarray::Array2;
 use crate::utils::dot;
 
-
+#[derive(Clone)]
 pub struct Screenton {
     dot_size: usize,
     dot: Array2<f32>,
