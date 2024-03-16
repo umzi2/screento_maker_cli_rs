@@ -1,5 +1,5 @@
 mod utils;
-
+use std::fs;
 use std::path::{Path, PathBuf};
 use indicatif::{ProgressBar, ProgressStyle};
 use rayon::prelude::*;
@@ -7,7 +7,7 @@ use crate::utils::screenton::Screenton;
 use crate::utils::image_ut::{read,save};
 
 fn process(inp: &PathBuf, out:&PathBuf, mut scr:Screenton){
-    let mut array = read(inp);
+    let mut array =read(inp);
     scr.run(&mut array);
     save(array,out)
 }
@@ -16,6 +16,13 @@ fn main() {
     let (inp,out,dot)=utils::parse::parse_args();
     let inp = Path::new(&inp);
     let out = Path::new(&out);
+    if let Err(_) = fs::metadata(&out) {
+        // Если папка не существует, создаем ее
+        match fs::create_dir(&out) {
+            Ok(_) => println!("Папка успешно создана"),
+            Err(err) => eprintln!("Ошибка при создании папки: {}", err),
+        }
+    }
     let dot_center = dot/2;
     let src= Screenton::new(dot,dot_center,dot_center);
     let paths = utils::paths::path2vec_img(inp);
